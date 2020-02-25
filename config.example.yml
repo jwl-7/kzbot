@@ -1,0 +1,4 @@
+bot:
+    prefix:     'COMMAND_PREFIX'
+    token:      'API_TOKEN'
+    owner:      123456789
