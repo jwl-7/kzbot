@@ -30,14 +30,14 @@ class Admin(commands.Cog):
         except discord.DiscordException:
             embed.add_field(
                 name='Admin',
-                value=f'[ERROR] *Failed to load extension* **{name}.py**'
+                value=f'[ERROR] Failed to load extension *{name}.py*'
             )
             return await ctx.send(embed=embed)
 
         print(f'[ADMIN] Loaded extension {name}.py')
         embed.add_field(
             name='Admin',
-            value=f'*Loaded extension* **{name}.py**'
+            value=f'Loaded extension *{name}.py*'
         )
         await ctx.send(embed=embed)
 
@@ -51,14 +51,14 @@ class Admin(commands.Cog):
         except discord.DiscordException:
             embed.add_field(
                 name='Admin',
-                value=f'[ERROR] *Failed to unload extension* **{name}.py**'
+                value=f'[ERROR] Failed to unload extension *{name}.py*'
             )
             return await ctx.send(embed=embed)
 
         print(f'[ADMIN] Unloaded extension {name}.py')
         embed.add_field(
             name='Admin',
-            value=f'*Unloaded extension* **{name}.py**'
+            value=f'Unloaded extension *{name}.py*'
         )
         await ctx.send(embed=embed)
 
@@ -72,14 +72,14 @@ class Admin(commands.Cog):
         except discord.DiscordException:
             embed.add_field(
                 name='Admin',
-                value=f'[ERROR] *Failed to reload extension* **{name}.py**'
+                value=f'[ERROR] Failed to reload extension *{name}.py*'
             )
             return await ctx.send(embed=embed)
 
         print(f'[ADMIN] Reloaded extension {name}.py')
         embed.add_field(
             name='Admin',
-            value=f'*Reloaded extension* **{name}.py**'
+            value=f'Reloaded extension *{name}.py*'
         )
         await ctx.send(embed=embed)
 
@@ -90,7 +90,7 @@ class Admin(commands.Cog):
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(
             name='Admin',
-            value=f'*Restarting* **KZBOT**...'
+            value=f'Restarting **KZBOT**...'
         )
         await ctx.send(embed=embed)
         await self.bot.logout()
