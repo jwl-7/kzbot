@@ -1,6 +1,6 @@
 """Maptop
 
-This module prints maptops from the KZ GlobalAPI.
+This module prints top map times from the KZ GlobalAPI.
 """
 
 

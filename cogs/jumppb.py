@@ -1,6 +1,6 @@
-"""Pb
+"""JumpPb
 
-This module looks up personal bests KZ GlobalAPI.
+This module prints personal best jumpstats from the KZ GlobalAPI.
 """
 
 

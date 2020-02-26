@@ -1,6 +1,6 @@
 """Pb
 
-This module looks up personal bests KZ GlobalAPI.
+This module prints personal best times from the KZ GlobalAPI.
 """
 
 
