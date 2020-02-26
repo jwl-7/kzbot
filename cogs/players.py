@@ -1,6 +1,6 @@
 """Players
 
-This module allows players to register their steamid in the local database.
+This module allows players to register their Steam ID in the local database.
 """
 
 
@@ -21,10 +21,10 @@ class Players(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def setaccount(self, ctx, steamid):
-        """!setaccount <steamid> - Register steamid to use !pb command."""
-        if not re.match(r'^STEAM_([0-5]):([0-1]):([0-9]+)$', steamid):
-            return await ctx.send('Error: Invalid <steamid> for !setaccount')
+    async def setaccount(self, ctx, steam_id):
+        """!setaccount <steam_id> - Register Steam ID to use !pb command."""
+        if not re.match(r'^STEAM_([0-5]):([0-1]):([0-9]+)$', steam_id):
+            return await ctx.send('Error: Invalid <steam_id> for !setaccount')
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),
@@ -32,15 +32,14 @@ class Players(commands.Cog):
         )
         embed.set_thumbnail(url=f'{ctx.author.avatar_url}')
         embed.add_field(name='Player', value=f'{ctx.author}')
-        embed.add_field(name='Steam ID', value=f'{steamid}')
+        embed.add_field(name='Steam ID', value=f'{steam_id}')
 
-        accounts = self.db.get_items()
-        for record in accounts:
-            if record[0] == ctx.author:
-                self.db.update_item(str(ctx.author), steamid)
-                return await ctx.send(embed=embed)
+        discord_id = str(ctx.author)
+        if self.db.is_registered(discord_id):
+            self.db.update_item(discord_id, steam_id)
+        else:
+            self.db.add_item(discord_id, steam_id)
 
-        self.db.add_item(str(ctx.author), steamid)
         return await ctx.send(embed=embed)
 
 
