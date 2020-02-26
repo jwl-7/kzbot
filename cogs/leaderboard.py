@@ -55,7 +55,7 @@ class Leaderboard(commands.Cog):
         """!ranktop <mode> - Get top players on points leaderboard."""
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode):
-            return await ctx.send('Error: Invalid search parameters for !top')
+            return await ctx.send('Error: Invalid search parameters for !ranktop')
 
         data = kzapi.get_ranktop(mode)
         if not data:
