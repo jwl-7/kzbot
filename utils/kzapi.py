@@ -81,23 +81,6 @@ def get_maplist():
         MAPS[data[x]['name']] = DIFFICULTIES[difficulty]
 
 
-def get_jumptop(jumptype):
-    """Search GlobalAPI in /jumpstats"""
-    payload = {}
-    payload['less_than_distance'] = 300 if jumptype == 'longjump' else 400
-    payload['is_crouch_boost'] = 'false'
-    payload['limit'] = 10
-
-    r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
-    try:
-        r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
-
-    data = r.json()
-    return data
-
-
 def get_maptop(mapname, mode=None, runtype=None):
     """Search GlobalAPI in /records/top"""
     payload = {}
@@ -107,6 +90,23 @@ def get_maptop(mapname, mode=None, runtype=None):
     payload['limit'] = 10
 
     r = requests.get(GAPI_URL + 'records/top', params=payload)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        return print(f'[ERROR] {error}')
+
+    data = r.json()
+    return data
+
+
+def get_jumptop(jumptype):
+    """Search GlobalAPI in /jumpstats"""
+    payload = {}
+    payload['less_than_distance'] = 300 if jumptype == 'longjump' else 400
+    payload['is_crouch_boost'] = 'false'
+    payload['limit'] = 10
+
+    r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
     try:
         r.raise_for_status()
     except requests.exceptions.HTTPError as error:
@@ -163,6 +163,24 @@ def get_pb(steam_id, mapname, mode=None, runtype=None):
     payload['limit'] = 1
 
     r = requests.get(GAPI_URL + 'records/top', params=payload)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        return print(f'[ERROR] {error}')
+
+    data = r.json()
+    return data
+
+
+def get_jumppb(steam_id, jumptype):
+    """Search GlobalAPI in /jumpstats"""
+    payload = {}
+    payload['steam_id'] = steam_id
+    payload['less_than_distance'] = 300 if jumptype == 'longjump' else 400
+    payload['is_crouch_boost'] = 'false'
+    payload['limit'] = 1
+
+    r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
     try:
         r.raise_for_status()
     except requests.exceptions.HTTPError as error:
