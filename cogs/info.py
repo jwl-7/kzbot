@@ -37,7 +37,7 @@ class Info(commands.Cog):
             '**!apistatus** - Get KZ Global API status.\n'
             '**!kzbothelp** - DM BOT command list.\n'
             '**!kzbotstatus** - Get KZBOT stats.\n'
-            '**!ping** - Test bot latency.'
+            '**!ping** - Test BOT latency.'
             )
         record_cmds = (
             '**!jumptop** *<jumptype>* - Get top jumpstats.\n'
