@@ -3,27 +3,27 @@ a python discord bot for the CS:GO - Kreedz discord server
 
 ## Commands
 * Info
-    - **!kzbothelp** - dm bot command list
-    - **!kzbotstatus** - kzbot stats
-    - **!ping** - test bot latency
+    - **!apistatus** - Get KZ Global API status.
+    - **!kzbothelp** - DM BOT command list.
+    - **!kzbotstatus** - Get KZBOT stats.
+    - **!ping** - Test BOT latency.
 
-* KZ Global API
-    - **!apistatus** - get current status of kz global api
-
-* Map Records
-    - **!maptop** *\<map> \<mode> \<runtype>* - get top times for map
-    - **!wr** *\<map> \<mode> \<runtype>* - get world record for map
-
-* Recent
-    - **!recentwrs** - get recent WRs.
-    - **!recentbans** - get recent bans.
+* Records
+    - **!jumptop** *\<jumptype>* - Get top jumpstats.
+    - **!maptop** *\<map> \<mode> \<runtype>* - Get top times for map.
+    - **!recentwrs** - Get recent WRs.
+    - **!recentbans** - Get recent bans.
+    - **!wr** *\<map> \<mode> \<runtype>* - Get world record for map.
 
 * Leaderboard
-    - **!top** *\<mode>* - get top players on records leaderboard
-    - **!ranktop** *\<mode>* - get top players on points leaderboard
+    - **!top** *\<mode>* - Get top players on records leaderboard.
+    - **!ranktop** *\<mode>* - Get top players on points leaderboard.
 
-* Jumpstats
-    - **!jumptop** *\<jumptype>* - get top jumpstats
+* Personal Best Commands
+    - **!jumppb** - Get personal best jumpstats.
+    - **!pb** *\<map> \<mode> \<runtype>* - Get personal best time for map.
+    - **!rank** *\<mode>* - Get rank/points.
+    - **!setaccount** *\<steam_id>* - Register Steam ID to use !pb command.
 
 ## Command Parameters
 - *\<map>* - the filename of the map
@@ -52,11 +52,11 @@ a python discord bot for the CS:GO - Kreedz discord server
         * laj - ladderjump
 
 ## Admin Commands
-- **!adminhelp** - dm bot admin command list
-- **!load** *\<name>* - load extension
-- **!unload** *\<name>* - unload extension
-- **!reload** *\<name>* - reload extension
-- **!restart** - restart bot
+- **!adminhelp** - DM BOT admin command list.
+- **!load** *\<name>* - Load extension.
+- **!unload** *\<name>* - Unload extension.
+- **!reload** *\<name>* - Reload extension.
+- **!restart** - Restart BOT.
 
 ## Requirements
 * Python 3.8+
