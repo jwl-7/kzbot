@@ -40,20 +40,20 @@ class Info(commands.Cog):
             '**!ping** - Test BOT latency.'
             )
         record_cmds = (
-            '**!jumptop** *<jumptype>* - Get top jumpstats.\n'
+            '**!jumptop** *<jumptype> <bind/nobind>* - Get top jumpstats.\n'
             '**!maptop** *<map> <mode> <runtype>* - Get top times for map.\n'
             '**!recentbans** - Get recent bans.\n'
             '**!recentwrs** - Get recent WRs.\n'
             '**!wr** *<map> <mode> <runtype>* - Get WR for map.'
             )
         leaderboard_cmds = (
-            '**!top** *<mode>* - Get top players on records leaderboard.\n'
-            '**!ranktop** *<mode>* - Get top players on points leaderboard.'
+            '**!top** *<mode> <runtype>* - Get top players on records leaderboard.\n'
+            '**!ranktop** *<mode> <runtype>* - Get top players on points leaderboard.'
             )
         pb_cmds = (
-            '**!jumppb** - Get personal best jumpstats.\n'
+            '**!jumppb** *<bind/nobind>* - Get personal best jumpstats.\n'
             '**!pb** *<map> <mode> <runtype>* - Get personal best time for map.\n'
-            '**!rank** *<mode>* - Get rank/points.\n'
+            '**!rank** *<mode>* - Get personal rank on points leaderboard.\n'
             '**!setaccount** *<steam_id>* - Register Steam ID to use !pb command.'
             )
         embed = discord.Embed(colour=discord.Colour.green())

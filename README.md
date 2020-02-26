@@ -9,20 +9,20 @@ a python discord bot for the CS:GO - Kreedz discord server
     - **!ping** - Test BOT latency.
 
 * Records
-    - **!jumptop** *\<jumptype>* - Get top jumpstats.
+    - **!jumptop** *\<jumptype> \<bind/nobind>* - Get top jumpstats.
     - **!maptop** *\<map> \<mode> \<runtype>* - Get top times for map.
     - **!recentwrs** - Get recent WRs.
     - **!recentbans** - Get recent bans.
     - **!wr** *\<map> \<mode> \<runtype>* - Get world record for map.
 
 * Leaderboard
-    - **!top** *\<mode>* - Get top players on records leaderboard.
-    - **!ranktop** *\<mode>* - Get top players on points leaderboard.
+    - **!top** *\<mode> \<runtype>* - Get top players on records leaderboard.
+    - **!ranktop** *\<mode> \<runtype>* - Get top players on points leaderboard.
 
 * Personal Best Commands
-    - **!jumppb** - Get personal best jumpstats.
+    - **!jumppb** *\<bind/nobind>* - Get personal best jumpstats.
     - **!pb** *\<map> \<mode> \<runtype>* - Get personal best time for map.
-    - **!rank** *\<mode>* - Get rank/points.
+    - **!rank** *\<mode>* - Get personal rank on points leaderboard.
     - **!setaccount** *\<steam_id>* - Register Steam ID to use !pb command.
 
 ## Command Parameters
