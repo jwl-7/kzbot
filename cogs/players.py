@@ -11,6 +11,7 @@ import discord
 from db.dbhelper import Database
 from discord.ext import commands
 from utils import kzapi
+from utils import steamid
 
 
 class Players(commands.Cog):
@@ -23,7 +24,7 @@ class Players(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def setaccount(self, ctx, steam_id):
         """!setaccount <steam_id> - Register Steam ID to use !pb command."""
-        if not re.match(r'^STEAM_([0-5]):([0-1]):([0-9]+)$', steam_id):
+        if not steamid.is_valid_steamid(steam_id):
             return await ctx.send('Error: Invalid <steam_id> for !setaccount')
 
         embed = discord.Embed(
