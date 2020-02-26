@@ -16,19 +16,20 @@ class Jumpstats(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def jumptop(self, ctx, jumptype):
-        """!jumptop <jumptype> - Get top jumpstats."""
+    async def jumptop(self, ctx, jumptype, bindtype='nobind'):
+        """!jumptop <jumptype> <bind/nobind> - Get top jumpstats."""
         jumptype = jumptype.lower()
-        if not kzapi.valid_search_jumpstats(jumptype):
+        bindtype = bindtype.lower()
+        if not kzapi.valid_search_jumpstats(jumptype, bindtype):
             return await ctx.send('Error: Invalid search parameters for !jumptop')
 
         if jumptype in kzapi.JUMPTYPES:
             jumptype = kzapi.JUMPTYPES[jumptype]
 
-        data = kzapi.get_jumptop(jumptype)
+        data = kzapi.get_jumptop(jumptype, bindtype)
         if not data:
             jumptype = jumptype + ' ' if jumptype else ''
-            return await ctx.send(f'Search for !jumptop {jumptype} failed')
+            return await ctx.send(f'Search for !jumptop {jumptype} {bindtype} failed')
 
         positions = ''
         players = ''
@@ -40,7 +41,8 @@ class Jumpstats(commands.Cog):
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),
-            title=f'Top Jumpstats'
+            title=f'Top Jumpstats',
+            description=f"Type: {'No Bind' if bindtype == 'nobind' else 'Binded'}"
         )
         embed.add_field(name='#', value=positions)
         embed.add_field(name='Player', value=players)
