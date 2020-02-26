@@ -153,6 +153,25 @@ def get_wrtop(mode):
     return data
 
 
+def get_pb(steam_id, mapname, mode=None, runtype=None):
+    """Search GlobalAPI in /records/top"""
+    payload = {}
+    payload['steam_id'] = steam_id
+    payload['map_name'] = mapname
+    payload['modes_list_string'] = MODES[mode]
+    payload['has_teleports'] = RUNTYPES[runtype]
+    payload['limit'] = 1
+
+    r = requests.get(GAPI_URL + 'records/top', params=payload)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        return print(f'[ERROR] {error}')
+
+    data = r.json()
+    return data
+
+
 def get_recent_bans():
     """Search GlobalAPI in /bans"""
     payload = {}
