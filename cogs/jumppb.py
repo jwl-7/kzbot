@@ -34,8 +34,8 @@ class JumpPb(commands.Cog):
         for jumptype in kzapi.JUMPTYPES_ALT:
             data = kzapi.get_jumppb(steam_id, jumptype)
             jumptypes += f'{jumptype}\n'
-            distances += f"{data[0]['distance']}\n"
-            strafes += f"{data[0]['strafe_count']}\n"
+            distances += f"{data[0]['distance']}\n" if data else 'N/A\n'
+            strafes += f"{data[0]['strafe_count']}\n" if data else 'N/A\n'
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),
