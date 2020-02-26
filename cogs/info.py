@@ -34,24 +34,37 @@ class Info(commands.Cog):
     async def kzbothelp(self, ctx):
         """!kzbothelp - DM bot command list."""
         info_cmds = (
-            '**!apistatus** - check global api status\n'
-            '**!kzbothelp** - dm bot command list\n'
-            '**!kzbotstatus** - kz bot stats\n'
-            '**!ping** - test bot latency'
+            '**!apistatus** - Get KZ Global API status.\n'
+            '**!kzbothelp** - DM BOT command list\n'
+            '**!kzbotstatus** - Get KZBOT stats.\n'
+            '**!ping** - Test bot latency.'
             )
-        kz_cmds = (
-            '**!maptop** *<map> <kzt/skz/vnl> <pro/tp>*\n'
-            '**!recentbans**\n'
-            '**!recentwrs**\n'
-            '**!wr** *<map> <kzt/skz/vnl> <pro/tp>*'
+        record_cmds = (
+            '**!jumptop** *<jumptype>* - Get top jumpstats.\n'
+            '**!maptop** *<map> <mode> <runtype>* - Get top times for map.\n'
+            '**!recentbans** - Get recent bans.\n'
+            '**!recentwrs** - Get recent WRs.\n'
+            '**!wr** *<map> <mode> <runtype>* - Get WR for map.'
+            )
+        leaderboard_cmds = (
+            '**!top** *<mode>* - Get top players on records leaderboard.\n'
+            '**!ranktop** *<mode>* - Get top players on points leaderboard.'
+            )
+        pb_cmds = (
+            '**!jumppb** - Get personal best jumpstats.\n'
+            '**!pb** *<map> <mode> <runtype>* - Get personal best time for map.\n'
+            '**!rank** *<mode>* - Get rank/points.\n'
+            '**!setaccount** *<steam_id>* - Register Steam ID to use !pb command.'
             )
         embed = discord.Embed(colour=discord.Colour.green())
         embed.set_author(
             name='KZ BOT - Command List',
             icon_url='https://i.imgur.com/sSqZw6W.png'
         )
-        embed.add_field(name='Info', value=info_cmds, inline=False)
-        embed.add_field(name='KZ Records', value=kz_cmds, inline=False)
+        embed.add_field(name='Info Commands', value=info_cmds, inline=False)
+        embed.add_field(name='Record Commands', value=record_cmds, inline=False)
+        embed.add_field(name='Leaderboard Commands', value=leaderboard_cmds, inline=False)
+        embed.add_field(name='Personal Best Commands', value=pb_cmds, inline=False)
         try:
             await ctx.author.send(embed=embed)
         except discord.Forbidden:
@@ -62,11 +75,11 @@ class Info(commands.Cog):
     async def adminhelp(self, ctx):
         """!adminhelp - DM bot admin command list."""
         admin_cmds = (
-            '**!adminhelp** - dm bot admin command list\n'
-            '**!load** *<name>* - load extension\n'
-            '**!unload** *<name>* - unload extension\n'
-            '**!reload** *<name>* - reload extension\n'
-            '**!restart** - restart bot'
+            '**!adminhelp** - DM BOT admin command list.\n'
+            '**!load** *<name>* - Load extension.\n'
+            '**!unload** *<name>* - Unload extension.\n'
+            '**!reload** *<name>* - Reload extension.\n'
+            '**!restart** - Restart BOT.'
             )
 
         embed = discord.Embed(colour=discord.Colour.red())
@@ -88,7 +101,7 @@ class Info(commands.Cog):
         milliseconds = int(round(latency * 1000))
 
         embed = discord.Embed(colour=discord.Colour.green())
-        embed.add_field(name='Pong!', value=f'*Latency:* **{milliseconds}ms**')
+        embed.add_field(name='Pong!', value=f'Latency: *{milliseconds}ms*')
         await ctx.send(embed=embed)
 
     @commands.command()
@@ -113,9 +126,9 @@ class Info(commands.Cog):
             value=f'{int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds',
             inline=False
         )
-        embed.add_field(name='📥 Messages Received', value=f'{self.bot.message_count}')
-        embed.add_field(name='📤 Messages Sent', value=f'{self.bot.messages_sent}')
-        embed.add_field(name='🏷️ Mentions', value=f'{self.bot.mentions_count}')
+        embed.add_field(name='📥 Messages Received', value=self.bot.message_count)
+        embed.add_field(name='📤 Messages Sent', value=self.bot.messages_sent)
+        embed.add_field(name='🏷️ Mentions', value=self.bot.mentions_count)
         embed.add_field(name='💾 Memory Usage', value=f'{mem_usage:.2f} MiB')
         await ctx.send(embed=embed)
 
