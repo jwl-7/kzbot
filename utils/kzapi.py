@@ -190,14 +190,14 @@ def get_jumppb(steam_id, jumptype):
     return data
 
 
-def get_rank(steam64, mode):
+def get_rank(steam64, mode, runtype):
     """Search GlobalAPI in /player_ranks"""
     payload = {}
     payload['steamid64s'] = steam64
     payload['finishes_greater_than'] = 0
     payload['mode_ids'] = MODE_IDS[mode]
     payload['stages'] = 0
-    payload['has_teleports'] = RUNTYPES['pro']
+    payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
 
     r = requests.get(GAPI_URL + 'player_ranks', params=payload)
