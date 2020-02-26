@@ -35,7 +35,7 @@ class Players(commands.Cog):
         embed.add_field(name='Steam ID', value=f'{steam_id}')
 
         discord_id = str(ctx.author)
-        if self.db.is_registered(discord_id):
+        if self.db.get_account(discord_id):
             self.db.update_item(discord_id, steam_id)
         else:
             self.db.add_item(discord_id, steam_id)
