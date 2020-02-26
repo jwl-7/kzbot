@@ -5,6 +5,7 @@ This module prints recent world records and bans from the KZ GlobalAPI.
 
 
 import discord
+
 from discord.ext import commands
 from utils import kzapi
 

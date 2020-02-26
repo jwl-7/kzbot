@@ -5,6 +5,7 @@ This module fetches the status of the KZ GlobalAPI.
 
 
 import discord
+
 from bs4 import BeautifulSoup
 from discord.ext import commands
 from utils import kzapi

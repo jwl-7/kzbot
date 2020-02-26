@@ -7,10 +7,10 @@ This module allows players to register their Steam ID in the local database.
 import re
 
 import discord
-from discord.ext import commands
-from utils import kzapi
 
 from db.dbhelper import Database
+from discord.ext import commands
+from utils import kzapi
 
 
 class Players(commands.Cog):
