@@ -76,3 +76,11 @@ class Database:
                 discord_id
         '''
         return [x for x in self.conn.execute(stmt)]
+
+    def is_registered(self, discord_id):
+        """Check if discord id exists in the table."""
+        accounts = self.get_items()
+        for record in accounts:
+            if record[0] == discord_id:
+                return True
+        return False
