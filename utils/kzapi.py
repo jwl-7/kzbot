@@ -47,6 +47,10 @@ JUMPTYPES = {
     'laj': 'ladderjump'
 }
 JUMPTYPES_ALT = {value: key for key, value in JUMPTYPES.items()}
+BINDTYPES = {
+    'nobind': 'false',
+    'bind': 'true'
+}
 
 
 def get_status():
@@ -99,11 +103,11 @@ def get_maptop(mapname, mode=None, runtype=None):
     return data
 
 
-def get_jumptop(jumptype):
+def get_jumptop(jumptype, bindtype):
     """Search GlobalAPI in /jumpstats"""
     payload = {}
     payload['less_than_distance'] = 300 if jumptype == 'longjump' else 400
-    payload['is_crouch_boost'] = 'false'
+    payload['is_crouch_boost'] = BINDTYPES[bindtype]
     payload['limit'] = 10
 
     r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
@@ -172,12 +176,12 @@ def get_pb(steam_id, mapname, mode=None, runtype=None):
     return data
 
 
-def get_jumppb(steam_id, jumptype):
+def get_jumppb(steam_id, jumptype, bindtype):
     """Search GlobalAPI in /jumpstats"""
     payload = {}
     payload['steam_id'] = steam_id
     payload['less_than_distance'] = 300 if jumptype == 'longjump' else 400
-    payload['is_crouch_boost'] = 'false'
+    payload['is_crouch_boost'] = BINDTYPES[bindtype]
     payload['limit'] = 1
 
     r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
@@ -267,10 +271,16 @@ def valid_search_leaderboard(mode, runtype):
     return False
 
 
-def valid_search_jumpstats(jumptype):
+def valid_search_jumppb(bindtype):
+    if (bindtype in BINDTYPES):
+        return True
+    return False
+
+
+def valid_search_jumpstats(jumptype, bindtype):
     if (
-        jumptype in JUMPTYPES or
-        jumptype in JUMPTYPES_ALT
+        (jumptype in JUMPTYPES or jumptype in JUMPTYPES_ALT) and
+        bindtype in BINDTYPES
     ):
         return True
     return False
