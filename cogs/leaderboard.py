@@ -16,16 +16,15 @@ class Leaderboard(commands.Cog):
 
     @commands.command(aliases=['top10', 'leaderboard'])
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def top(self, ctx, mode):
-        """!top <mode> - Get top players on records leaderboard."""
+    async def top(self, ctx, mode, runtype='pro'):
+        """!top <mode> <runtype> - Get top players on records leaderboard."""
         mode = mode.lower()
-        if not kzapi.valid_search_leaderboard(mode):
+        if not kzapi.valid_search_leaderboard(mode, runtype):
             return await ctx.send('Error: Invalid search parameters for !top')
 
-        data = kzapi.get_wrtop(mode)
+        data = kzapi.get_wrtop(mode, runtype)
         if not data:
-            mode = mode + ' ' if mode else ''
-            return await ctx.send(f'Search for !top {mode} failed')
+            return await ctx.send(f'Search for !top {mode} {runtype} failed')
 
         positions = ''
         players = ''
@@ -36,7 +35,7 @@ class Leaderboard(commands.Cog):
             records += f"{data[x]['count']}\n"
         info = (
             f'Mode: {mode.upper()}\n'
-            'Runtype: PRO'
+            f'Runtype: {runtype.upper()}'
             )
 
         embed = discord.Embed(
@@ -51,16 +50,15 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def ranktop(self, ctx, mode):
-        """!ranktop <mode> - Get top players on points leaderboard."""
+    async def ranktop(self, ctx, mode, runtype='pro'):
+        """!ranktop <mode> <runtype> - Get top players on points leaderboard."""
         mode = mode.lower()
-        if not kzapi.valid_search_leaderboard(mode):
+        if not kzapi.valid_search_leaderboard(mode, runtype):
             return await ctx.send('Error: Invalid search parameters for !ranktop')
 
-        data = kzapi.get_ranktop(mode)
+        data = kzapi.get_ranktop(mode, runtype)
         if not data:
-            mode = mode + ' ' if mode else ''
-            return await ctx.send(f'Search for !ranktop {mode}failed')
+            return await ctx.send(f'Search for !ranktop {mode} {runtype} failed')
 
         positions = ''
         players = ''
@@ -71,7 +69,7 @@ class Leaderboard(commands.Cog):
             points += f"{data[x]['points']}\n"
         info = (
             f'Mode: {mode.upper()}\n'
-            'Runtype: PRO'
+            f'Runtype: {runtype.upper()}'
             )
 
         embed = discord.Embed(
