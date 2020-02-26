@@ -44,9 +44,9 @@ class ApiStatus(commands.Cog):
             title=f'KZ Global API'
         )
         embed.set_thumbnail(url='https://i.imgur.com/sSqZw6W.png')
-        embed.add_field(name='Global API Status', value=f'{status}', inline=False)
-        embed.add_field(name='Uptime over past 90 days', value=f'{uptimes}', inline=False)
-        embed.add_field(name='Status Page', value=f'{kzapi.GAPI_STATUS_URL}', inline=False)
+        embed.add_field(name='Global API Status', value=status, inline=False)
+        embed.add_field(name='Uptime over past 90 days', value=uptimes, inline=False)
+        embed.add_field(name='Status Page', value=kzapi.GAPI_STATUS_URL, inline=False)
         await ctx.send(embed=embed)
 
 

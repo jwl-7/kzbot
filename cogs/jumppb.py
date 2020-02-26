@@ -41,8 +41,8 @@ class JumpPb(commands.Cog):
             colour=discord.Colour.blue(),
             title=f'Personal Best Jumpstats'
         )
-        embed.set_thumbnail(url=f'{ctx.author.avatar_url}')
-        embed.add_field(name='Player', value=f'{ctx.author}', inline=False)
+        embed.set_thumbnail(url=ctx.author.avatar_url)
+        embed.add_field(name='Player', value=ctx.author.name, inline=False)
         embed.add_field(name='Jumptype', value=jumptypes)
         embed.add_field(name='Distance', value=distances)
         embed.add_field(name='Strafes', value=strafes)

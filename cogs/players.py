@@ -31,9 +31,9 @@ class Players(commands.Cog):
             colour=discord.Colour.blue(),
             title='Account Registration'
         )
-        embed.set_thumbnail(url=f'{ctx.author.avatar_url}')
-        embed.add_field(name='Player', value=f'{ctx.author}')
-        embed.add_field(name='Steam ID', value=f'{steam_id}')
+        embed.set_thumbnail(url=ctx.author.avatar_url)
+        embed.add_field(name='Player', value=ctx.author)
+        embed.add_field(name='Steam ID', value=steam_id)
 
         discord_id = str(ctx.author)
         if self.db.get_account(discord_id):
