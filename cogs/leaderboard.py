@@ -25,7 +25,7 @@ class Leaderboard(commands.Cog):
         data = kzapi.get_wrtop(mode)
         if not data:
             mode = mode + ' ' if mode else ''
-            return await ctx.send(f'Search for !top {mode}failed')
+            return await ctx.send(f'Search for !top {mode} failed')
 
         positions = ''
         players = ''

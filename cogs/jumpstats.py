@@ -28,7 +28,7 @@ class Jumpstats(commands.Cog):
         data = kzapi.get_jumptop(jumptype)
         if not data:
             jumptype = jumptype + ' ' if jumptype else ''
-            return await ctx.send(f'Search for !jumptop {jumptype}failed')
+            return await ctx.send(f'Search for !jumptop {jumptype} failed')
 
         positions = ''
         players = ''

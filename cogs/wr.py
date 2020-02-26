@@ -26,9 +26,7 @@ class Wr(commands.Cog):
 
         data = kzapi.get_maptop(mapname, mode, runtype)
         if not data:
-            mode = mode + ' ' if mode else ''
-            runtype = runtype + ' ' if runtype else ''
-            return await ctx.send(f'Search for !maptop {mapname} {mode}{runtype}failed')
+            return await ctx.send(f'Search for !maptop {mapname} {mode} {runtype} failed')
 
         player = data[0]['player_name']
         time = kzapi.convert_time(data[0]['time'])
