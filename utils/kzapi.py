@@ -116,13 +116,13 @@ def get_jumptop(jumptype):
     return data
 
 
-def get_ranktop(mode):
+def get_ranktop(mode, runtype):
     """Search GlobalAPI in /player_ranks"""
     payload = {}
     payload['finishes_greater_than'] = 0
     payload['mode_ids'] = MODE_IDS[mode]
     payload['stages'] = 0
-    payload['has_teleports'] = RUNTYPES['pro']
+    payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
     r = requests.get(GAPI_URL + 'player_ranks', params=payload)
@@ -135,12 +135,12 @@ def get_ranktop(mode):
     return data
 
 
-def get_wrtop(mode):
+def get_wrtop(mode, runtype):
     """Search GlobalAPI in /records/top/world_records"""
     payload = {}
     payload['stages'] = 0
     payload['mode_ids'] = MODE_IDS[mode]
-    payload['has_teleports'] = RUNTYPES['pro']
+    payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
     r = requests.get(GAPI_URL + 'records/top/world_records', params=payload)
@@ -258,8 +258,11 @@ def get_wr(mapname, mode, runtype):
     return data
 
 
-def valid_search_leaderboard(mode):
-    if mode in MODE_IDS:
+def valid_search_leaderboard(mode, runtype):
+    if (
+        mode in MODE_IDS and
+        runtype in RUNTYPES
+    ):
         return True
     return False
 
