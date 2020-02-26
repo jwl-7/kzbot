@@ -30,12 +30,12 @@ class Wr(commands.Cog):
             runtype = runtype + ' ' if runtype else ''
             return await ctx.send(f'Search for !maptop {mapname} {mode}{runtype}failed')
 
-        player = f"{data[0]['player_name']}"
-        time = f"{kzapi.convert_time(data[0]['time'])}"
-        teleports = f"{data[0]['teleports']}"
-        server = f"{data[0]['server_name']}"
-        date = f"{data[0]['created_on'][:10]}"
-        runid = f"{data[0]['id']}"
+        player = data[0]['player_name']
+        time = kzapi.convert_time(data[0]['time'])
+        teleports = data[0]['teleports']
+        server = data[0]['server_name']
+        date = data[0]['created_on'][:10]
+        runid = data[0]['id']
         info = (
             f'Map: {mapname}\n'
             f'Difficulty: {kzapi.MAPS[mapname]}\n'
