@@ -19,7 +19,7 @@ class Rank(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def rank(self, ctx, mode):
+    async def rank(self, ctx, mode, runtype='pro'):
         """!rank <mode> - Get personal rank on points leaderboard."""
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
@@ -29,14 +29,14 @@ class Rank(commands.Cog):
             )
 
         mode = mode.lower()
-        if not kzapi.valid_search_leaderboard(mode):
-            return await ctx.send('Error: Invalid search parameters for !top')
+        if not kzapi.valid_search_leaderboard(mode, runtype):
+            return await ctx.send('Error: Invalid search parameters for !rank')
 
         steam_id = account[1]
         steam64 = steamid.steamid_to_steam64(steam_id)
-        data = kzapi.get_rank(steam64, mode)
+        data = kzapi.get_rank(steam64, mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !rank {mode} failed')
+            return await ctx.send(f'Search for !rank {mode} {runtype} failed')
 
         player = data[0]['player_name']
         points = data[0]['points']
@@ -44,7 +44,7 @@ class Rank(commands.Cog):
         finishes = data[0]['finishes']
         info = (
             f'Mode: {mode.upper()}\n'
-            'Runtype: PRO'
+            f'Runtype: {runtype.upper()}'
             )
 
         embed = discord.Embed(
@@ -56,7 +56,7 @@ class Rank(commands.Cog):
         embed.add_field(name='Player', value=player, inline=False)
         embed.add_field(name='Points', value=points)
         embed.add_field(name='Average', value=average)
-        embed.add_field(name='Finishes', value=finishes)
+        embed.add_field(name='Map Completions', value=finishes)
         await ctx.send(embed=embed)
 
 
