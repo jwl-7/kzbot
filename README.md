@@ -60,7 +60,11 @@ a python discord bot for the CS:GO - Kreedz discord server
 
 ## Requirements
 * Python 3.8+
-* [discord.py](https://github.com/Rapptz/discord.py)
+* [discord.py](https://pypi.org/project/discord.py/)
+* [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+* [psutil](https://pypi.org/project/psutil/)
+* [PyYAML](https://pypi.org/project/PyYAML/)
+* [requests](https://pypi.org/project/requests/)
 
 ## License
 This project is released under the GNU GPL License - see the [LICENSE](LICENSE) file for details
