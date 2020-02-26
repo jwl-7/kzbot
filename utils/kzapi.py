@@ -190,6 +190,26 @@ def get_jumppb(steam_id, jumptype):
     return data
 
 
+def get_rank(steam64, mode):
+    """Search GlobalAPI in /player_ranks"""
+    payload = {}
+    payload['steamid64s'] = steam64
+    payload['finishes_greater_than'] = 0
+    payload['mode_ids'] = MODE_IDS[mode]
+    payload['stages'] = 0
+    payload['has_teleports'] = RUNTYPES['pro']
+    payload['limit'] = 1
+
+    r = requests.get(GAPI_URL + 'player_ranks', params=payload)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        return print(f'[ERROR] {error}')
+
+    data = r.json()
+    return data
+
+
 def get_recent_bans():
     """Search GlobalAPI in /bans"""
     payload = {}
