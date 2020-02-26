@@ -61,6 +61,26 @@ def get_status():
     return data
 
 
+def get_maplist():
+    """Get all maps (name/difficulty) from the GlobalAPI"""
+    payload = {}
+    payload['is_validated'] = 'true'
+
+    r = requests.get(GAPI_URL + 'maps', params=payload)
+    try:
+        r.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        return print(f'[ERROR] {error}')
+
+    data = r.json()
+    if not data:
+        return
+
+    for x in range(len(data)):
+        difficulty = data[x]['difficulty']
+        MAPS[data[x]['name']] = DIFFICULTIES[difficulty]
+
+
 def get_jumptop(jumptype):
     """Search GlobalAPI in /jumpstats"""
     payload = {}
@@ -78,15 +98,15 @@ def get_jumptop(jumptype):
     return data
 
 
-def get_wrtop(mode):
-    """Search GlobalAPI in /records/top/world_records"""
+def get_maptop(mapname, mode=None, runtype=None):
+    """Search GlobalAPI in /records/top"""
     payload = {}
-    payload['stages'] = 0
-    payload['mode_ids'] = MODE_IDS[mode]
-    payload['has_teleports'] = RUNTYPES['pro']
+    payload['map_name'] = mapname
+    payload['modes_list_string'] = MODES[mode]
+    payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'records/top/world_records', params=payload)
+    r = requests.get(GAPI_URL + 'records/top', params=payload)
     try:
         r.raise_for_status()
     except requests.exceptions.HTTPError as error:
@@ -115,35 +135,15 @@ def get_ranktop(mode):
     return data
 
 
-def get_maplist():
-    """Get all maps (name/difficulty) from the GlobalAPI"""
+def get_wrtop(mode):
+    """Search GlobalAPI in /records/top/world_records"""
     payload = {}
-    payload['is_validated'] = 'true'
-
-    r = requests.get(GAPI_URL + 'maps', params=payload)
-    try:
-        r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
-
-    data = r.json()
-    if not data:
-        return
-
-    for x in range(len(data)):
-        difficulty = data[x]['difficulty']
-        MAPS[data[x]['name']] = DIFFICULTIES[difficulty]
-
-
-def get_maptop(mapname, mode=None, runtype=None):
-    """Search GlobalAPI in /records/top"""
-    payload = {}
-    payload['map_name'] = mapname
-    payload['modes_list_string'] = MODES[mode]
-    payload['has_teleports'] = RUNTYPES[runtype]
+    payload['stages'] = 0
+    payload['mode_ids'] = MODE_IDS[mode]
+    payload['has_teleports'] = RUNTYPES['pro']
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'records/top', params=payload)
+    r = requests.get(GAPI_URL + 'records/top/world_records', params=payload)
     try:
         r.raise_for_status()
     except requests.exceptions.HTTPError as error:
@@ -201,19 +201,6 @@ def get_wr(mapname, mode, runtype):
     return data
 
 
-def valid_search_records(mapname, mode=None, runtype=None):
-    if not MAPS:
-        get_maplist()
-
-    if (
-        mapname in MAPS and
-        mode in MODES and
-        runtype in RUNTYPES
-    ):
-        return True
-    return False
-
-
 def valid_search_leaderboard(mode):
     if mode in MODE_IDS:
         return True
@@ -224,6 +211,19 @@ def valid_search_jumpstats(jumptype):
     if (
         jumptype in JUMPTYPES or
         jumptype in JUMPTYPES_ALT
+    ):
+        return True
+    return False
+
+
+def valid_search_records(mapname, mode=None, runtype=None):
+    if not MAPS:
+        get_maplist()
+
+    if (
+        mapname in MAPS and
+        mode in MODES and
+        runtype in RUNTYPES
     ):
         return True
     return False
