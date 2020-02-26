@@ -37,15 +37,10 @@ class Jumpstats(commands.Cog):
             positions += f'{x + 1}\n'
             players += f"{data[x]['player_name']}\n"
             distances += f"{data[x]['distance']}\n"
-        info = (
-            'Mode: No Bind\n'
-            f'Jumptype: {jumptype.capitalize()}'
-            )
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),
-            title=f'Top Jumpstats',
-            description=info
+            title=f'Top Jumpstats'
         )
         embed.add_field(name='#', value=positions)
         embed.add_field(name='Player', value=players)
