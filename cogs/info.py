@@ -53,7 +53,7 @@ class Info(commands.Cog):
         pb_cmds = (
             '**!jumppb** *<bind/nobind>* - Get personal best jumpstats.\n'
             '**!pb** *<map> <mode> <runtype>* - Get personal best time for map.\n'
-            '**!rank** *<mode>* - Get personal rank on points leaderboard.\n'
+            '**!rank** *<mode> <runtype>* - Get personal rank on points leaderboard.\n'
             '**!setaccount** *<steam_id>* - Register Steam ID to use !pb command.'
             )
         embed = discord.Embed(colour=discord.Colour.green())

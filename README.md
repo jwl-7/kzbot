@@ -22,7 +22,7 @@ a python discord bot for the CS:GO - Kreedz discord server
 * Personal Best Commands
     - **!jumppb** *\<bind/nobind>* - Get personal best jumpstats.
     - **!pb** *\<map> \<mode> \<runtype>* - Get personal best time for map.
-    - **!rank** *\<mode>* - Get personal rank on points leaderboard.
+    - **!rank** *\<mode> \<runtype>* - Get personal rank on points leaderboard.
     - **!setaccount** *\<steam_id>* - Register Steam ID to use !pb command.
 
 ## Command Parameters
