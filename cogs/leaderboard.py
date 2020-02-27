@@ -16,7 +16,7 @@ class Leaderboard(commands.Cog):
 
     @commands.command(aliases=['top10', 'leaderboard'])
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def top(self, ctx, mode, runtype='pro'):
+    async def top(self, ctx, mode='kzt', runtype='pro'):
         """!top <mode> <runtype> - Get top players on records leaderboard."""
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode, runtype):
@@ -50,7 +50,7 @@ class Leaderboard(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def ranktop(self, ctx, mode, runtype='pro'):
+    async def ranktop(self, ctx, mode='kzt', runtype='pro'):
         """!ranktop <mode> <runtype> - Get top players on points leaderboard."""
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode, runtype):

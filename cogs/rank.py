@@ -19,8 +19,8 @@ class Rank(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def rank(self, ctx, mode, runtype='pro'):
-        """!rank <mode> - Get personal rank on points leaderboard."""
+    async def rank(self, ctx, mode='kzt', runtype='pro'):
+        """!rank <mode> <runtype> - Get personal rank on points leaderboard."""
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
         if not account:

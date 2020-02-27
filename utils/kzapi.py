@@ -17,14 +17,12 @@ DIFFICULTIES = {
     3: 'Medium',
     4: 'Hard',
     5: 'Very Hard',
-    6: 'Death',
-    None: None
+    6: 'Death'
 }
 MODES = {
     'kzt': 'kz_timer',
     'skz': 'kz_simple',
-    'vnl': 'kz_vanilla',
-    None: None
+    'vnl': 'kz_vanilla'
 }
 MODES_ALT = {value: key for key, value in MODES.items()}
 MODE_IDS = {
@@ -34,8 +32,7 @@ MODE_IDS = {
 }
 RUNTYPES = {
     'pro': 'false',
-    'tp': 'true',
-    None: None
+    'tp': 'true'
 }
 JUMPTYPES = {
     'lj': 'longjump',
@@ -85,7 +82,7 @@ def get_maplist():
         MAPS[data[x]['name']] = DIFFICULTIES[difficulty]
 
 
-def get_maptop(mapname, mode=None, runtype=None):
+def get_maptop(mapname, mode, runtype):
     """Search GlobalAPI in /records/top"""
     payload = {}
     payload['map_name'] = mapname
@@ -157,7 +154,7 @@ def get_wrtop(mode, runtype):
     return data
 
 
-def get_pb(steam_id, mapname, mode=None, runtype=None):
+def get_pb(steam_id, mapname, mode, runtype):
     """Search GlobalAPI in /records/top"""
     payload = {}
     payload['steam_id'] = steam_id
@@ -286,7 +283,7 @@ def valid_search_jumpstats(jumptype, bindtype):
     return False
 
 
-def valid_search_records(mapname, mode=None, runtype=None):
+def valid_search_records(mapname, mode, runtype):
     if not MAPS:
         get_maplist()
 

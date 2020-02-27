@@ -16,19 +16,17 @@ class Maptop(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def maptop(self, ctx, mapname, mode=None, runtype=None):
+    async def maptop(self, ctx, mapname, mode='kzt', runtype='pro'):
         """!maptop <map> <mode> <runtype> - Get top times for map."""
         mapname = mapname.lower()
-        mode = mode.lower() if mode else None
-        runtype = runtype.lower() if runtype else None
+        mode = mode.lower()
+        runtype = runtype.lower()
         if not kzapi.valid_search_records(mapname, mode, runtype):
             return await ctx.send('Error: Invalid search parameters for !maptop')
 
         data = kzapi.get_maptop(mapname, mode, runtype)
         if not data:
-            mode = mode + ' ' if mode else ''
-            runtype = runtype + ' ' if runtype else ''
-            return await ctx.send(f'Search for !maptop {mapname} {mode}{runtype}failed')
+            return await ctx.send(f'Search for !maptop {mapname} {mode} {runtype} failed')
 
         players = ''
         times = ''
@@ -41,8 +39,8 @@ class Maptop(commands.Cog):
         info = (
             f'Map: {mapname}\n'
             f'Difficulty: {kzapi.MAPS[mapname]}\n'
-            f"Mode: {mode.upper() if mode else 'ANY'}\n"
-            f"Runtype: {runtype.upper() if runtype else 'ANY'}"
+            f"Mode: {mode.upper()}\n"
+            f"Runtype: {runtype.upper()}"
             )
 
         embed = discord.Embed(

@@ -16,7 +16,7 @@ class Wr(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def wr(self, ctx, mapname, mode, runtype):
+    async def wr(self, ctx, mapname, mode='kzt', runtype='pro'):
         """!wr <map> <mode> <runtype> - Get WR for map."""
         mapname = mapname.lower()
         mode = mode.lower()

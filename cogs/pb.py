@@ -18,7 +18,7 @@ class Pb(commands.Cog):
 
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
-    async def pb(self, ctx, mapname, mode=None, runtype=None):
+    async def pb(self, ctx, mapname, mode='kzt', runtype='pro'):
         """!pb <map> <mode> <runtype> - Get personal best time for map."""
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
@@ -29,30 +29,27 @@ class Pb(commands.Cog):
 
         steam_id = account[1]
         mapname = mapname.lower()
-        mode = mode.lower() if mode else None
-        runtype = runtype.lower() if runtype else None
+        mode = mode.lower()
+        runtype = runtype.lower()
         if not kzapi.valid_search_records(mapname, mode, runtype):
             return await ctx.send('Error: Invalid search parameters for !pb')
 
         data = kzapi.get_pb(steam_id, mapname, mode, runtype)
         if not data:
-            mode = mode + ' ' if mode else ''
-            runtype = runtype + ' ' if runtype else ''
-            return await ctx.send(f'Search for !pb {mapname} {mode}{runtype}failed')
+            return await ctx.send(f'Search for !pb {mapname} {mode} {runtype} failed')
 
         player = data[0]['player_name']
         mode = kzapi.MODES_ALT[data[0]['mode']]
         time = kzapi.convert_time(data[0]['time'])
         teleports = data[0]['teleports']
-        runtype = 'PRO' if not teleports else 'TP'
         server = data[0]['server_name']
         date = data[0]['created_on'][:10]
 
         info = (
             f'Map: {mapname}\n'
             f'Difficulty: {kzapi.MAPS[mapname]}\n'
-            f"Mode: {mode.upper() if mode else 'ANY'}\n"
-            f"Runtype: {runtype.upper() if runtype else 'ANY'}"
+            f"Mode: {mode.upper()}\n"
+            f"Runtype: {runtype.upper()}"
             )
 
         embed = discord.Embed(
