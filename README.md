@@ -52,11 +52,11 @@ a python discord bot for the CS:GO - Kreedz discord server
         * laj - ladderjump
 
 ## Admin Commands
-- **!adminhelp** - DM BOT admin command list.
+- **!adminhelp** - DM KZBOT admin command list.
 - **!load** *\<name>* - Load extension.
 - **!unload** *\<name>* - Unload extension.
 - **!reload** *\<name>* - Reload extension.
-- **!restart** - Restart BOT.
+- **!restart** - Restart KZBOT.
 
 ## Requirements
 * Python 3.8+
