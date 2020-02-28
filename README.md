@@ -3,9 +3,9 @@ a python discord bot for the CS:GO - Kreedz discord server
 
 ## Commands
 * Info
-    - **!apistatus** - Get KZ Global API status.
-    - **!kzbothelp** - DM BOT command list.
-    - **!kzbotstatus** - Get KZBOT stats.
+    - **!apistatus** - Check KZ Global API status.
+    - **!kzbothelp** - DM KZBOT command list.
+    - **!kzbotstatus** - KZBOT stats.
     - **!ping** - Test BOT latency.
 
 * Records
