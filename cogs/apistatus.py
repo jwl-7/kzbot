@@ -18,10 +18,12 @@ class ApiStatus(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def apistatus(self, ctx):
-        """!apistatus - Check KZ Global API status."""
+        """!apistatus - Check KZ GlobalAPI status."""
         html_page = kzapi.get_status()
         if not html_page:
-            return await ctx.send('Failed to retrieve Global API status')
+            embed = discord.Embed(colour=discord.Colour.darker_grey())
+            embed.description = 'Failed to retrieve GlobalAPI status.'
+            return await ctx.send(embed=embed)
 
         soup = BeautifulSoup(html_page, 'html.parser')
         status = soup.find('span', class_='status').get_text(strip=True)
@@ -41,10 +43,10 @@ class ApiStatus(commands.Cog):
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),
-            title=f'KZ Global API'
+            title=f'KZ GlobalAPI'
         )
         embed.set_thumbnail(url='https://i.imgur.com/sSqZw6W.png')
-        embed.add_field(name='Global API Status', value=status, inline=False)
+        embed.add_field(name='GlobalAPI Status', value=status, inline=False)
         embed.add_field(name='Uptime over past 90 days', value=uptimes, inline=False)
         embed.add_field(name='Status Page', value=kzapi.GAPI_STATUS_URL, inline=False)
         await ctx.send(embed=embed)

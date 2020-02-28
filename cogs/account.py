@@ -24,8 +24,10 @@ class Account(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def setaccount(self, ctx, steam_id):
         """!setaccount <steam_id> - Register Steam ID to use PB commands."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         if not steamid.is_valid_steamid(steam_id):
-            return await ctx.send('Error: Invalid <steam_id> for !setaccount')
+            embed.description = 'Invalid *<steam_id>* for **!setaccount**'
+            return await ctx.send(embed=embed)
 
         embed = discord.Embed(
             colour=discord.Colour.blue(),

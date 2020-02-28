@@ -20,23 +20,29 @@ class Pb(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def pb(self, ctx, mapname, mode='kzt', runtype='pro'):
         """!pb <map> <mode> <runtype> - Get personal best time for map."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
         if not account:
-            return await ctx.send(
-                'Error: You need to register your Steam ID with !setaccount <steam_id>'
-            )
+            embed.description = (
+                    f'{ctx.author.name},\n'
+                    'register your Steam ID with **!setaccount** *<steam_id>*\n'
+                    'before using personal best commands.'
+                )
+            return await ctx.send(embed=embed)
 
         steam_id = account[1]
         mapname = mapname.lower()
         mode = mode.lower()
         runtype = runtype.lower()
         if not kzapi.valid_search_records(mapname, mode, runtype):
-            return await ctx.send('Error: Invalid search parameters for !pb')
+            embed.description = 'Invalid search parameters for **!pb**'
+            return await ctx.send(embed=embed)
 
         data = kzapi.get_pb(steam_id, mapname, mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !pb {mapname} {mode} {runtype} failed')
+            embed.description = f'Search for **!pb** *{mapname} {mode} {runtype}* failed.'
+            return await ctx.send(embed=embed)
 
         player = data[0]['player_name']
         mode = kzapi.MODES_ALT[data[0]['mode']]

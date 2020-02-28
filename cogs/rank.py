@@ -21,22 +21,28 @@ class Rank(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def rank(self, ctx, mode='kzt', runtype='pro'):
         """!rank <mode> <runtype> - Get personal rank on points leaderboard."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
         if not account:
-            return await ctx.send(
-                'Error: You need to register your Steam ID with !setaccount <steam_id>'
-            )
+            embed.description = (
+                    f'{ctx.author.name},\n'
+                    'register your Steam ID with **!setaccount** *<steam_id>*\n'
+                    'before using personal best commands.'
+                )
+            return await ctx.send(embed=embed)
 
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode, runtype):
-            return await ctx.send('Error: Invalid search parameters for !rank')
+            embed.description = 'Invalid search parameters for **!rank**'
+            return await ctx.send(embed=embed)
 
         steam_id = account[1]
         steam64 = steamid.steamid_to_steam64(steam_id)
         data = kzapi.get_rank(steam64, mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !rank {mode} {runtype} failed')
+            embed.description = f'Search for **!rank** *{mode} {runtype}* failed.'
+            return await ctx.send(embed=embed)
 
         player = data[0]['player_name']
         points = data[0]['points']

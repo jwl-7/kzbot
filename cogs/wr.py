@@ -18,15 +18,18 @@ class Wr(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def wr(self, ctx, mapname, mode='kzt', runtype='pro'):
         """!wr <map> <mode> <runtype> - Get WR for map."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         mapname = mapname.lower()
         mode = mode.lower()
         runtype = runtype.lower()
         if not kzapi.valid_search_records(mapname, mode, runtype):
-            return await ctx.send('Error: Invalid search parameters for !maptop')
+            embed.description = 'Invalid search parameters for **!wr**'
+            return await ctx.send(embed=embed)
 
         data = kzapi.get_maptop(mapname, mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !maptop {mapname} {mode} {runtype} failed')
+            embed.description = f'Search for **!wr** *{mapname} {mode} {runtype}* failed.'
+            return await ctx.send(embed=embed)
 
         player = data[0]['player_name']
         time = kzapi.convert_time(data[0]['time'])

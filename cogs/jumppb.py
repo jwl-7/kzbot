@@ -20,16 +20,21 @@ class JumpPb(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def jumppb(self, ctx, bindtype='nobind'):
         """!jumppb <bind/nobind> - Get personal best jumpstats."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         discord_id = str(ctx.author)
         account = self.db.get_account(discord_id)
         if not account:
-            return await ctx.send(
-                'Error: You need to register your Steam ID with !setaccount <steam_id>'
-            )
+            embed.description = (
+                    f'{ctx.author.name},\n'
+                    'register your Steam ID with **!setaccount** *<steam_id>*\n'
+                    'before using personal best commands.'
+                )
+            return await ctx.send(embed=embed)
 
         bindtype = bindtype.lower()
         if not kzapi.valid_search_jumppb(bindtype):
-            return await ctx.send('Error: Invalid search parameters for !jumppb')
+            embed.description = 'Invalid search parameters for **!jumppb**'
+            return await ctx.send(embed=embed)
 
         steam_id = account[1]
         jumptypes = ''

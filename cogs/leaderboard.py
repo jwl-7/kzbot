@@ -18,13 +18,16 @@ class Leaderboard(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def top(self, ctx, mode='kzt', runtype='pro'):
         """!top <mode> <runtype> - Get top players on records leaderboard."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode, runtype):
-            return await ctx.send('Error: Invalid search parameters for !top')
+            embed.description = 'Invalid search parameters for **!top**'
+            return await ctx.send(embed=embed)
 
         data = kzapi.get_wrtop(mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !top {mode} {runtype} failed')
+            embed.description = f'Search for **!top** *{mode} {runtype}* failed.'
+            return await ctx.send(embed=embed)
 
         positions = ''
         players = ''
@@ -52,13 +55,16 @@ class Leaderboard(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def ranktop(self, ctx, mode='kzt', runtype='pro'):
         """!ranktop <mode> <runtype> - Get top players on points leaderboard."""
+        embed = discord.Embed(colour=discord.Colour.darker_grey())
         mode = mode.lower()
         if not kzapi.valid_search_leaderboard(mode, runtype):
-            return await ctx.send('Error: Invalid search parameters for !ranktop')
+            embed.description = 'Invalid search parameters for **!ranktop**'
+            return await ctx.send(embed=embed)
 
         data = kzapi.get_ranktop(mode, runtype)
         if not data:
-            return await ctx.send(f'Search for !ranktop {mode} {runtype} failed')
+            embed.description = f'Search for **!ranktop** *{mode} {runtype}* failed.'
+            return await ctx.send(embed=embed)
 
         positions = ''
         players = ''
