@@ -52,11 +52,11 @@ BINDTYPES = {
 
 def get_status():
     """Check GlobalAPI Status Page"""
-    r = requests.get(GAPI_STATUS_URL)
     try:
+        r = requests.get(GAPI_STATUS_URL)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.content
     return data
@@ -67,11 +67,11 @@ def get_maplist():
     payload = {}
     payload['is_validated'] = 'true'
 
-    r = requests.get(GAPI_URL + 'maps', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}maps', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     if not data:
@@ -90,11 +90,11 @@ def get_maptop(mapname, mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'records/top', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}records/top', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -107,11 +107,11 @@ def get_jumptop(jumptype, bindtype):
     payload['is_crouch_boost'] = BINDTYPES[bindtype]
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}jumpstats/{jumptype}/top', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -126,11 +126,11 @@ def get_ranktop(mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'player_ranks', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}player_ranks', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -144,11 +144,11 @@ def get_wrtop(mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'records/top/world_records', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}records/top/world_records', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -163,11 +163,11 @@ def get_pb(steam_id, mapname, mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
 
-    r = requests.get(GAPI_URL + 'records/top', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}records/top', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -181,11 +181,11 @@ def get_jumppb(steam_id, jumptype, bindtype):
     payload['is_crouch_boost'] = BINDTYPES[bindtype]
     payload['limit'] = 1
 
-    r = requests.get(GAPI_URL + f'jumpstats/{jumptype}/top', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}jumpstats/{jumptype}/top', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -201,11 +201,11 @@ def get_rank(steam64, mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
 
-    r = requests.get(GAPI_URL + 'player_ranks', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}player_ranks', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -216,11 +216,11 @@ def get_recent_bans():
     payload = {}
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + 'bans', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}bans', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -231,11 +231,11 @@ def get_recent_wrs():
     payload = {}
     payload['limit'] = 10
 
-    r = requests.get(GAPI_URL + '/records/top/recent', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}/records/top/recent', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
@@ -249,11 +249,11 @@ def get_wr(mapname, mode, runtype):
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
 
-    r = requests.get(GAPI_URL + 'records/top', params=payload)
     try:
+        r = requests.get(f'{GAPI_URL}records/top', params=payload)
         r.raise_for_status()
-    except requests.exceptions.HTTPError as error:
-        return print(f'[ERROR] {error}')
+    except requests.exceptions.RequestException:
+        return
 
     data = r.json()
     return data
