@@ -32,11 +32,11 @@ class Info(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def kzbothelp(self, ctx):
-        """!kzbothelp - DM bot command list."""
+        """!kzbothelp - DM KZBOT command list."""
         info_cmds = (
-            '**!apistatus** - Get KZ Global API status.\n'
-            '**!kzbothelp** - DM BOT command list.\n'
-            '**!kzbotstatus** - Get KZBOT stats.\n'
+            '**!apistatus** - Check KZ Global API status.\n'
+            '**!kzbothelp** - DM KZBOT command list.\n'
+            '**!kzbotstatus** - KZBOT stats.\n'
             '**!ping** - Test BOT latency.'
             )
         record_cmds = (
@@ -54,7 +54,7 @@ class Info(commands.Cog):
             '**!jumppb** *<bind/nobind>* - Get personal best jumpstats.\n'
             '**!pb** *<map> <mode> <runtype>* - Get personal best time for map.\n'
             '**!rank** *<mode> <runtype>* - Get personal rank on points leaderboard.\n'
-            '**!setaccount** *<steam_id>* - Register Steam ID to use !pb command.'
+            '**!setaccount** *<steam_id>* - Register Steam ID to use PB commands.'
             )
         embed = discord.Embed(colour=discord.Colour.green())
         embed.set_author(
@@ -107,7 +107,7 @@ class Info(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def kzbotstatus(self, ctx):
-        """!kzbotstatus - Get stats on kzbot."""
+        """!kzbotstatus - KZBOT stats."""
         uptime = time.time() - self.bot.uptime
         minutes, seconds = divmod(uptime, 60)
         hours, minutes = divmod(minutes, 60)
