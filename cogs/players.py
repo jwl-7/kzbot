@@ -23,7 +23,7 @@ class Players(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def setaccount(self, ctx, steam_id):
-        """!setaccount <steam_id> - Register Steam ID to use !pb command."""
+        """!setaccount <steam_id> - Register Steam ID to use PB commands."""
         if not steamid.is_valid_steamid(steam_id):
             return await ctx.send('Error: Invalid <steam_id> for !setaccount')
 

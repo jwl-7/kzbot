@@ -18,7 +18,7 @@ class ApiStatus(commands.Cog):
     @commands.command()
     @commands.cooldown(1, 10, commands.BucketType.user)
     async def apistatus(self, ctx):
-        """!apistatus - Get KZ Global API status."""
+        """!apistatus - Check KZ Global API status."""
         html_page = kzapi.get_status()
         if not html_page:
             return await ctx.send('Failed to retrieve Global API status')
