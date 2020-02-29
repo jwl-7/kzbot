@@ -18,10 +18,12 @@ class Recent(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def recentwrs(self, ctx):
         """!recentwrs - Get recent WRs."""
-        embed = discord.Embed(colour=discord.Colour.darker_grey())
         data = kzapi.get_recent_wrs()
         if not data:
-            embed.description = f'Search for **!recentwrs** failed.'
+            embed = discord.Embed(
+                colour=discord.Colour.darker_grey(),
+                description='Search for **!recentwrs** failed.'
+            )
             return await ctx.send(embed=embed)
 
         players = ''
@@ -47,10 +49,12 @@ class Recent(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.channel)
     async def recentbans(self, ctx):
         """!recentbans - Get recent bans."""
-        embed = discord.Embed(colour=discord.Colour.darker_grey())
         data = kzapi.get_recent_bans()
         if not data:
-            embed.description = f'Search for **!recentbans** failed.'
+            embed = discord.Embed(
+                colour=discord.Colour.darker_grey(),
+                description='Search for **!recentbans** failed.'
+            )
             return await ctx.send(embed=embed)
 
         players = ''

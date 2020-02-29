@@ -25,10 +25,10 @@ class JumpPb(commands.Cog):
         account = self.db.get_account(discord_id)
         if not account:
             embed.description = (
-                    f'{ctx.author.name},\n'
-                    'register your Steam ID with **!setaccount** *<steam_id>*\n'
-                    'before using personal best commands.'
-                )
+                f'{ctx.author.name},\n'
+                'register your Steam ID with **!setaccount** *<steam_id>*\n'
+                'before using personal best commands.'
+            )
             return await ctx.send(embed=embed)
 
         bindtype = bindtype.lower()

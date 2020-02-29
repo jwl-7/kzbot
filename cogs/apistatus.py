@@ -21,8 +21,10 @@ class ApiStatus(commands.Cog):
         """!apistatus - Check KZ GlobalAPI status."""
         html_page = kzapi.get_status()
         if not html_page:
-            embed = discord.Embed(colour=discord.Colour.darker_grey())
-            embed.description = 'Failed to retrieve GlobalAPI status.'
+            embed = discord.Embed(
+                colour=discord.Colour.darker_grey(),
+                description='Failed to retrieve GlobalAPI status.'
+            )
             return await ctx.send(embed=embed)
 
         soup = BeautifulSoup(html_page, 'html.parser')
