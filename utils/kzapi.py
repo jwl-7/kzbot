@@ -17,7 +17,8 @@ DIFFICULTIES = {
     3: 'Medium',
     4: 'Hard',
     5: 'Very Hard',
-    6: 'Death'
+    6: 'Extreme',
+    7: 'Death'
 }
 MODES = {
     'kzt': 'kz_timer',
@@ -66,6 +67,7 @@ def get_maplist():
     """Get all maps (name/difficulty) from the GlobalAPI"""
     payload = {}
     payload['is_validated'] = 'true'
+    payload['limit'] = 999
 
     try:
         r = requests.get(f'{GAPI_URL}maps', params=payload)
