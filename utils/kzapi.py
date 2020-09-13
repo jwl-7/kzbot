@@ -88,6 +88,7 @@ def get_maptop(mapname, mode, runtype):
     """Search GlobalAPI in /records/top"""
     payload = {}
     payload['map_name'] = mapname
+    payload['stage'] = 0
     payload['modes_list_string'] = MODES[mode]
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 10
@@ -161,6 +162,7 @@ def get_pb(steam_id, mapname, mode, runtype):
     payload = {}
     payload['steam_id'] = steam_id
     payload['map_name'] = mapname
+    payload['stage'] = 0
     payload['modes_list_string'] = MODES[mode]
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
@@ -231,6 +233,7 @@ def get_recent_bans():
 def get_recent_wrs():
     """Search GlobalAPI in /records/top/recent"""
     payload = {}
+    payload['stage'] = 0
     payload['limit'] = 10
 
     try:
@@ -247,6 +250,7 @@ def get_wr(mapname, mode, runtype):
     """Search GlobalAPI in /records/top"""
     payload = {}
     payload['map_name'] = mapname
+    payload['stage'] = 0
     payload['modes_list_string'] = MODES[mode]
     payload['has_teleports'] = RUNTYPES[runtype]
     payload['limit'] = 1
